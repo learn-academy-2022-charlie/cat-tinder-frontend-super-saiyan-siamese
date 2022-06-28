@@ -18,15 +18,6 @@ import {
 import cats from './components/mockCats'
 import { Component } from 'react';
 
-
-// class App extends Component{
-//   constructor(props){
-//     super(props)
-//     this.state = {
-//       cats: cats
-//     }
-//   }
-
 class App extends Component {
   constructor(props) {
     super(props)
