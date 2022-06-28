@@ -1,70 +1,156 @@
-# Getting Started with Create React App
+# Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+$ yarn create react-app cat-tinder-frontend
+$ cd cat-tinder-frontend
+```
 
-## Available Scripts
+Add the remote from your GitHub classroom repository
 
-In the project directory, you can run:
+```
+$ git checkout -b main
+$ git add .
+$ git commit -m "Initial commit."
+$ git push origin main
+$ yarn start
+```
 
-### `yarn start`
+## Creating folders and files
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Created directories:
+    - src/assests
+    - src/components
+    - src/pages
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Created files:
+    - src/components
+        - Header.js
+        - Footer.js
 
-### `yarn test`
+## Creating Pages Files
+- Created files:
+    - src/components
+        - Home.js
+        - CatIndex.js
+        - CatShow.js
+        - CatNew.js
+        - CatEdit.js
+        - NotFound.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Added Reactstrap
+```
+$ yarn add bootstrap
+$ yarn add reactstrap
+```
+## Added React Router and Mock Cats
+```
+$ yarn add react-router-dom@5.3.0
+```
+>File: App.js
+```javascript
+import {
+  // Austin renamed 'BrowserRouter' to 'Router'. Unsure if we need to do that too.
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
+```
+>File: mockCats.js
+```javascript
+let cats = [
+    {
+      id: 1,
+      name: "Mittens",
+      age: 5,
+      enjoys: "sunshine and warm spots",
+      image: "https://images.unsplash.com/photo-1543852786-1cf6624b9987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      id: 2,
+      name: "Raisins",
+      age: 4,
+      enjoys: "being queen of the dogs",
+      image: "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1092&q=80"
+    },
+    {
+      id: 3,
+      name: "Toast",
+      age: 1,
+      enjoys: "getting all the attention",
+      image: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+    }
+  ]
+  export default cats
+```
+>File: App.js
+```javascript
+import  cats  from './components/mockCats'
 
-### `yarn build`
+class App extends Component{
+  constructor(props){
+    super(props)
+    this.state ={
+      cats: cats
+    }
+  }
+  render() { 
+  return (
+      <Router>
+        <Header/>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/catindex" component={CatIndex} />
+            <Route path="/catshow" component={CatShow} />
+            <Route path="/catnew" component={CatNew} />
+            <Route path="/catedit" component={CatEdit} />
+            <Route component={NotFound}/>
+          </Switch>
+        <Footer/>
+      </Router>
+    
+  );
+  }
+}
+export default App;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+## Default Styling
+>File: src/App.css
+```css
+#mainFont {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: rgb(242, 14, 174);
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Header.css, Footer.css, NotFound.css
+>File: src/components/Header.css
+```
+.header {
+    font-size: 2rem;
+    position: sticky;
+    top: 0
+}
+```
+>File: src/components/Footer.css
+```
+.footer {
+    font-size: 100%;
+}
+```
+>File: src/pages/NotFound.css
+```
+.notFound {
+    font-size: 100%;
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# NOTE TO SELF, TESTING TO BE ADDED LATER. WE GOT AHEAD OF OURSELVES
+## Testing with Enzyme
 
-### `yarn eject`
+`$ yarn add -D enzyme react-test-renderer enzyme-adapter-react-16`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+File path: src/App.test.js
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
