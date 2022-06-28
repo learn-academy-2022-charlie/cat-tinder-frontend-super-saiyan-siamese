@@ -19,22 +19,26 @@ describe("When App.js renders to the user", () => {
   beforeEach(() => {
     appRender = shallow(<App />)
   })
-  it("it displays a header", () => {
-    // let appRender = shallow(<App />)
+  it("it displays a header component", () => {
     let appHeaderRender = appRender.find("Header")
     expect(appHeaderRender.length).toEqual(1)
 
   })
-  it("it displays a footer", () => {
-    // let appRender = shallow(<App />)
+  it("it displays a footer component", () => {
     let appFooterRender = appRender.find("Footer")
     expect(appFooterRender.length).toEqual(1)
   })
-  it("it provides a path to the home component", () => {
+  it("it provides a path to the home page", () => {
     // .find() attribute syntax ('[]')
     let renderedHomePath = appRender.find('[path="/"]')
-    console.log(renderedHomePath.debug())
-    console.log(renderedHomePath.props().component)
+    // console.log(renderedHomePath.debug())
+    // console.log(renderedHomePath.props().component)
     expect(renderedHomePath.length).toEqual(1)
+  })
+  it("it displays a not found component", () => {
+    let appNotFoundRender = appRender.find('[component={NotFound}]')
+     console.log(appNotFoundRender.debug())
+    console.log(appNotFoundRender.props().component)
+    expect(appNotFoundRender.length).toEqual(1)
   })
 })
