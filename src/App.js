@@ -15,7 +15,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import  cats  from './components/mockCats'
+import cats from './components/mockCats'
 import { Component } from 'react';
 
 
@@ -27,29 +27,31 @@ import { Component } from 'react';
 //     }
 //   }
 
-class App extends Component{
-  constructor(props){
+class App extends Component {
+  constructor(props) {
     super(props)
-    this.state ={
+    this.state = {
       cats: cats
     }
   }
-  render() { 
-  return (
+  render() {
+    return (
       <Router>
-        <Header/>
+        <main id="mainFont">
+          <Header />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/catindex" component={CatIndex} />
             <Route path="/catshow" component={CatShow} />
             <Route path="/catnew" component={CatNew} />
             <Route path="/catedit" component={CatEdit} />
-            <Route component={NotFound}/>
+            <Route component={NotFound} />
           </Switch>
-        <Footer/>
+          <Footer />
+        </main>
       </Router>
-    
-  );
+
+    );
   }
 }
 

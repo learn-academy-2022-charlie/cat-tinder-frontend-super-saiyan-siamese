@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-
+import './Footer.css'
 class Footer extends Component {
   render() {
     return (
-      <div>It's a Tarantino picture over here!!</div>
+      <p className="footer">It's a Tarantino picture over here!!</p>
     )
   }
 }

@@ -4,7 +4,7 @@ import './Header.css';
 class Header extends Component {
   render() {
     return (
-      <p>This is the header, baby!!</p>
+      <h1 className="header">This is the header, baby!!</h1>
     )
   }
 }

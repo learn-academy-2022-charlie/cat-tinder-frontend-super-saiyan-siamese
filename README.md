@@ -114,13 +114,43 @@ class App extends Component{
 export default App;
 
 ```
-## Styling the Header
+## Default Styling
+>File: src/App.css
 ```css
-p{ 
-    color: rgb(242, 14, 174);
-    font-family: courier;
-    font-size: 2rem;
+#mainFont {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: rgb(242, 14, 174);
 }
-
 ```
 
+## Header.css, Footer.css, NotFound.css
+>File: src/components/Header.css
+```
+.header {
+    font-size: 2rem;
+    position: sticky;
+    top: 0
+}
+```
+>File: src/components/Footer.css
+```
+.footer {
+    font-size: 100%;
+}
+```
+>File: src/pages/NotFound.css
+```
+.notFound {
+    font-size: 100%;
+}
+```
+
+# NOTE TO SELF, TESTING TO BE ADDED LATER. WE GOT AHEAD OF OURSELVES
+## Testing with Enzyme
+
+`$ yarn add -D enzyme react-test-renderer enzyme-adapter-react-16`
+
+File path: src/App.test.js
+```
+
+```

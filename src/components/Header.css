@@ -1,6 +1,5 @@
-
-p{ 
-    color: rgb(242, 14, 174);
-    font-family: courier;
+.header {
     font-size: 2rem;
+    position: sticky;
+    top: 0
 }
