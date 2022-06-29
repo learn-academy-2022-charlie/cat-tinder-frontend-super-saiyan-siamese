@@ -22,5 +22,6 @@ describe('When Header is rendered', () => {
 
         const HeaderTitleRender = renderedHeader.find('h1')
         expect(HeaderTitleRender.length).toEqual(1)
+        expect(HeaderTitleRender.text()).toEqual("Welcome to Super Saiyan Siamese Cat Tinder")
     })
 })
