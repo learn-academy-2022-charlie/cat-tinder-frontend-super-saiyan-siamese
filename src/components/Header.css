@@ -1,5 +1,6 @@
 .header {
     font-size: 2rem;
     position: sticky;
-    top: 0
+    top: 0;
+    background-color: rgb(86, 40, 40)
 }

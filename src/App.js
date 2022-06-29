@@ -26,13 +26,14 @@ class App extends Component {
     }
   }
   render() {
+    const { cats } = this.state
     return (
       <Router>
         <main id="mainFont">
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/catindex" component={CatIndex} />
+            <Route path="/catindex" render={(props) => <CatIndex cats={cats} />} />
             <Route path="/catshow" component={CatShow} />
             <Route path="/catnew" component={CatNew} />
             <Route path="/catedit" component={CatEdit} />
