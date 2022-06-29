@@ -35,10 +35,5 @@ describe("When App.js renders to the user", () => {
     // console.log(renderedHomePath.props().component)
     expect(renderedHomePath.length).toEqual(1)
   })
-  it("it displays a not found component", () => {
-    let appNotFoundRender = appRender.find('[component={NotFound}]')
-     console.log(appNotFoundRender.debug())
-    console.log(appNotFoundRender.props().component)
-    expect(appNotFoundRender.length).toEqual(1)
-  })
+
 })
