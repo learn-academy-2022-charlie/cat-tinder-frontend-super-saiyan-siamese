@@ -145,12 +145,177 @@ export default App;
 }
 ```
 
-# NOTE TO SELF, TESTING TO BE ADDED LATER. WE GOT AHEAD OF OURSELVES
 ## Testing with Enzyme
 
 `$ yarn add -D enzyme react-test-renderer enzyme-adapter-react-16`
 
-File path: src/App.test.js
+>File path: src/App.test.js
+```
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import App from './App.js'
+
+//Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
+Enzyme.configure({ adapter: new Adapter() })
+
+// describe takes two arguments
+describe("When App.js renders to the user", () => {
+  let appRender
+  beforeEach(() => {
+    appRender = shallow(<App />)
+  })
+  it("it displays a header component", () => {
+    let appHeaderRender = appRender.find("Header")
+    expect(appHeaderRender.length).toEqual(1)
+
+  })
+  it("it displays a footer component", () => {
+    let appFooterRender = appRender.find("Footer")
+    expect(appFooterRender.length).toEqual(1)
+  })
+  it("it provides a path to the home page", () => {
+    // .find() attribute syntax ('[]')
+    let renderedHomePath = appRender.find('[path="/"]')
+    // console.log(renderedHomePath.debug())
+    // console.log(renderedHomePath.props().component)
+    expect(renderedHomePath.length).toEqual(1)
+  })
+
+})
 ```
 
+> File path: src/pages/Home.test.js
+```
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import Home from './Home.js'
+
+//Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
+Enzyme.configure({adapter: new Adapter()})
+
+describe('When Home is rendered', () => {
+    let renderedHome
+  beforeEach(() => {
+    renderedHome = shallow(<Home/>)
+  })
+    it('displays a message within a div tag', () => {
+
+        const HomeTitleRender = renderedHome.find('div')
+        expect(HomeTitleRender.length).toEqual(1)
+    })
+})
+```
+
+> File path: src/pages/NotFound.test.js
+```
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import NotFound from './NotFound.js'
+
+//Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
+Enzyme.configure({adapter: new Adapter()})
+
+describe('When Not Found is rendered', () => {
+    let renderedNotFound
+  beforeEach(() => {
+    renderedNotFound = shallow(<NotFound/>)
+  })
+    it('displays a p message', () => {
+        const notFound = shallow(<NotFound />)
+        const notFoundTitleRender = notFound.find('p')
+        expect(notFoundTitleRender.length).toEqual(1)
+    })
+})
+```
+
+> File path: src/components/Header.test.js
+```
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import Header from './Header.js'
+
+//Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
+Enzyme.configure({adapter: new Adapter()})
+
+describe('When Header is rendered', () => {
+    let renderedHeader
+  beforeEach(() => {
+    renderedHeader = shallow(<Header/>)
+  })
+    it('displays a message within a h1 tag', () => {
+
+        const HeaderTitleRender = renderedHeader.find('h1')
+        expect(HeaderTitleRender.length).toEqual(1)
+        expect(HeaderTitleRender.text()).toEqual("Welcome to Super Saiyan Siamese Cat Tinder")
+    })
+})
+```
+
+> File path: src/components/Footer.test.js
+```
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import Footer from './Footer.js'
+
+//Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
+Enzyme.configure({adapter: new Adapter()})
+
+describe('When Footer is rendered', () => {
+    let renderedFooter
+  beforeEach(() => {
+    renderedFooter = shallow(<Footer/>)
+  })
+    it('displays a message within a p tag', () => {
+
+        const FooterTitleRender = renderedFooter.find('p')
+        expect(FooterTitleRender.length).toEqual(1)
+    })
+})
+```
+
+## Read Index and Show
+There was some incompatibility issues with the way the syllabus has syntax on Read, so we uninstalled the current React router DOM and installed a specific version.
+```
+$ yarn remove react-router-dom
+$ yarn add react-router-dom@5.3.3
 ```
