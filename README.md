@@ -372,14 +372,7 @@ describe('When CatIndex renders', () => {
 > File path: src/pages/CatIndex.js
 NOTE: As we left, we were working on getting cat thumbnails for each cat in CatIndex. We were unable to find the proper inline CSS styling to get it to work. We may need to make a separate CSS file OR we can edit index.css and have a class associated with the CatIndex.
 
-# Pausing Development for Backend Work (Branch: read-functionality)
-We are currently pausing development on the Read Functionality. We have created CatIndex.test.js and the Index route properly shows all of our mock cats. There are NavLinks for each cat that directs us to an unfinished Show page.
-
-When we get back to this we need to work on:
-- Test coverage for Show
-- Have Show display individual cats
-- "refactor the show route to pass the param of id for one cat"
-  - Find out what ^ means
+# CatShow and CatShow Testing
 
 Started CatShow testing.
 >File: src/pages/CatShow.test.js
@@ -440,3 +433,59 @@ The relevant route on App.js
               return <CatShow cat={cat}/>
             }} />
 ```
+
+# CatNew and CatNew Testing
+> file path: src/pages/CatNew.test.js
+```
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import CatNew from './CatNew.js'
+
+//Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
+Enzyme.configure({ adapter: new Adapter() })
+
+describe('When CatNew renders', () => {
+
+    let renderedCatNew
+    beforeEach(() => {
+        renderedCatNew = shallow(<CatNew />)
+    })
+    it('displays a form to make a new cat', () => {
+        const catShowRender = renderedCatNew.find('Form')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat name', () => {
+        const catShowRender = renderedCatNew.find('[name="name"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat age', () => {
+        const catShowRender = renderedCatNew.find('[name="age"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat enjoys', () => {
+        const catShowRender = renderedCatNew.find('[name="enjoys"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat image', () => {
+        const catShowRender = renderedCatNew.find('[name="image"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+
+})
+```
+
+> file path: src/pages/CatNew.js
+
+NOTE TO SELF: The submit button doesn't seem to do anything or redirect. We need to fix this.
+
+> file path: src/App.js
+
+NOTE TO SELF: Unsure if Route for CatNew works since our CatNew submit button doesn't work.

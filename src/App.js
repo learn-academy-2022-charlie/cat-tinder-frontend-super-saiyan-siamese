@@ -33,13 +33,18 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/catindex" render={(props) => <CatIndex cats={cats} />} />
-            <Route path="/catshow/:id" render={(props)=>{
+            <Route path="/catindex" render={(props) =>
+              <CatIndex cats={cats} />} />
+            <Route path="/catshow/:id" render={(props) => {
               let id = props.match.params.id
-              let cat = this.state.cats.find((catSingular)=> catSingular.id == id)
-              return <CatShow cat={cat}/>
+              let cat = this.state.cats.find((catSingular) =>
+                catSingular.id == id)
+              return <CatShow cat={cat} />
             }} />
-            <Route path="/catnew" component={CatNew} />
+            <Route
+              path="/catnew" render={(props) =>
+                <CatNew createCat={this.createCat} />}
+            />
             <Route path="/catedit" component={CatEdit} />
             <Route component={NotFound} />
           </Switch>
