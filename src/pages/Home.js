@@ -5,12 +5,10 @@ class Home extends Component {
   render() {
     return (
       <>
-
-      <br></br>
-      <NavLink to='/catindex'>
-        <p>See all the ridiculous hair!</p>
-      </NavLink>
-      
+        <br></br>
+        <NavLink to='/catindex'>
+          <p>See all the ridiculous hair!</p>
+        </NavLink>
       </>
     )
   }
