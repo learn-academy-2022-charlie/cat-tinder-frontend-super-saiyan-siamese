@@ -485,7 +485,9 @@ describe('When CatNew renders', () => {
 > file path: src/pages/CatNew.js
 
 NOTE TO SELF: The submit button doesn't seem to do anything or redirect. We need to fix this.
+    - We added a state for submitted, but we are unsure if it is doing anything.
+    - We added a console.log to the handleChange so we can see if the newCat state is being updated.
 
 > file path: src/App.js
 
-NOTE TO SELF: Unsure if Route for CatNew works since our CatNew submit button doesn't work.
+NOTE TO SELF: Unsure if Route for CatNew works since our CatNew submit button doesn't work. Checking for the change in newCat state in CatNew.js should help shed some light.

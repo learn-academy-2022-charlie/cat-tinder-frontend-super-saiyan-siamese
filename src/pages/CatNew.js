@@ -17,7 +17,8 @@ class CatNew extends Component {
         age: "",
         enjoys: "",
         image: ""
-      }
+      },
+      submitted: false
     }
   }
   handleChange = (e) => {
@@ -26,6 +27,8 @@ class CatNew extends Component {
     newCat[e.target.name] = e.target.value
     // setting state to the updated form content
     this.setState({ newCat: newCat })
+    // this console log should show if the newCat state was updated
+    console.log(this.state.newCat)
   }
 
   handleSubmit = () => {
