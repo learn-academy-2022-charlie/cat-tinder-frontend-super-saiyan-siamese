@@ -11,16 +11,16 @@ import Adapter from 'enzyme-adapter-react-16'
 import Home from './Home.js'
 
 //Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
-Enzyme.configure({adapter: new Adapter()})
+Enzyme.configure({ adapter: new Adapter() })
 
 describe('When Home is rendered', () => {
-    let renderedHome
+  let renderedHome
   beforeEach(() => {
-    renderedHome = shallow(<Home/>)
+    renderedHome = shallow(<Home />)
   })
-    it('displays a message within a div tag', () => {
+  it('displays a message within a p tag', () => {
 
-        const HomeTitleRender = renderedHome.find('div')
-        expect(HomeTitleRender.length).toEqual(1)
-    })
+    const HomeTitleRender = renderedHome.find('p')
+    expect(HomeTitleRender.length).toEqual(1)
+  })
 })

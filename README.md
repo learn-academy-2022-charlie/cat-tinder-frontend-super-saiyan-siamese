@@ -371,3 +371,12 @@ describe('When CatIndex renders', () => {
 
 > File path: src/pages/CatIndex.js
 NOTE: As we left, we were working on getting cat thumbnails for each cat in CatIndex. We were unable to find the proper inline CSS styling to get it to work. We may need to make a separate CSS file OR we can edit index.css and have a class associated with the CatIndex.
+
+# Pausing Development for Backend Work (Branch: read-functionality)
+We are currently pausing development on the Read Functionality. We have created CatIndex.test.js and the Index route properly shows all of our mock cats. There are NavLinks for each cat that directs us to an unfinished Show page.
+
+When we get back to this we need to work on:
+- Test coverage for Show
+- Have Show display individual cats
+- "refactor the show route to pass the param of id for one cat"
+  - Find out what ^ means
