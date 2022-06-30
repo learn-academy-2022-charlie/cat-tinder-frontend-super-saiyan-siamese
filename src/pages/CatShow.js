@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
+import {
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardText
+} from 'reactstrap'
 
 class CatShow extends Component {
   render() {
+    const { cat } = this.props
+    console.log("SHOW", cat);
+
     return (
       <>
       {cat && 

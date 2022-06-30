@@ -381,4 +381,62 @@ When we get back to this we need to work on:
 - "refactor the show route to pass the param of id for one cat"
   - Find out what ^ means
 
-Started CatShow testing. trying to figure out what's wrong
+Started CatShow testing.
+>File: src/pages/CatShow.test.js
+```javascript
+describe('When CatShow renders', () => {
+    const cat= {
+        id: 1,
+        name: "Chicken",
+        age: 5,
+        enjoys: "sunshine and warm spots",
+        image: "https://thiscatdoesnotexist.com/"
+    }
+    let renderedCatShow
+    beforeEach(() => {
+        renderedCatShow = shallow(<CatShow cat={cat} />)
+    })
+    it('displays profile of the cat in question', () => {
+
+        const catShowRender = renderedCatShow.find('Card')
+
+        expect(catShowRender.length).toEqual(1)
+
+    })
+
+})
+```
+The CatShow page
+>File: src/pages/CatShow.js
+```javascript
+class CatShow extends Component {
+  render() {
+    const { cat } = this.props
+    console.log("SHOW", cat);
+
+    return (
+      <>
+      {cat && 
+            <Card >
+              <CardImg top width="100%" src={cat.image} />
+              <CardBody>
+                <CardTitle>Hi, my name is {cat.name}</CardTitle>
+                <CardSubtitle>{cat.age}</CardSubtitle>
+                <CardText>{cat.enjoys}</CardText>
+              </CardBody>
+            </Card>
+        }
+      </>
+    )
+  }
+}
+```
+The relevant route on App.js
+```javascript
+
+            <Route path="/catshow/:id" render={(props)=>{
+              let id = props.match.params.id
+              let cat = this.state.cats.find((catSingular)=> catSingular.id == id)
+              return <CatShow cat={cat}/>
+            }} />
+```

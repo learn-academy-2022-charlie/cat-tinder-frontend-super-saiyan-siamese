@@ -16,7 +16,7 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('When CatShow renders', () => {
     const cat= {
         id: 1,
-        name: "Mittens",
+        name: "Chicken",
         age: 5,
         enjoys: "sunshine and warm spots",
         image: "https://thiscatdoesnotexist.com/"
