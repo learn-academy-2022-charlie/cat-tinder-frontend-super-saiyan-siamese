@@ -14,7 +14,9 @@ class CatIndex extends Component {
     const { cats } = this.props
     console.log("INDEX", cats)
     return (<>
-
+      <NavLink to='/'>
+        HOME!
+      </NavLink>
       <div>Pick your training partner for the hyperbolic time chamber</div>
 
       {cats && cats.map((cat, index) => {
