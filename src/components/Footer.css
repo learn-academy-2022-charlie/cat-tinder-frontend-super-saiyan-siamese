@@ -1,3 +1,10 @@
 .footer {
     font-size: 100%;
+    position: sticky;
+    /* unsure if this bottom tag is as useful as a sideways wipe */
+    bottom: 0;
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
 }

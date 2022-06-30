@@ -3,7 +3,7 @@ import './Footer.css'
 class Footer extends Component {
   render() {
     return (
-      <p className="footer">It's a Tarantino picture over here!!</p>
+      <p className="footer">By Michael and Lance</p>
     )
   }
 }
