@@ -380,3 +380,5 @@ When we get back to this we need to work on:
 - Have Show display individual cats
 - "refactor the show route to pass the param of id for one cat"
   - Find out what ^ means
+
+Started CatShow testing. trying to figure out what's wrong

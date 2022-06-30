@@ -5,9 +5,7 @@ class Home extends Component {
   render() {
     return (
       <>
-      <NavLink to='/'>
-        HOME!
-      </NavLink>
+
       <br></br>
       <NavLink to='/catindex'>
         <p>See all the ridiculous hair!</p>

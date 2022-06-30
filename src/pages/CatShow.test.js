@@ -1,4 +1,3 @@
-
 // Imports React into our test file.
 import React from 'react'
 
@@ -9,19 +8,29 @@ import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 // Imports in the component we are going to be testing.
-import Home from './Home.js'
+import CatShow from './CatShow.js'
 
 //Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('When Home is rendered', () => {
-  let renderedHome
-  beforeEach(() => {
-    renderedHome = shallow(<Home />)
-  })
-  it('displays a message within a p tag', () => {
+describe('When CatShow renders', () => {
+    const cat= {
+        id: 1,
+        name: "Mittens",
+        age: 5,
+        enjoys: "sunshine and warm spots",
+        image: "https://thiscatdoesnotexist.com/"
+    }
+    let renderedCatShow
+    beforeEach(() => {
+        renderedCatShow = shallow(<CatShow cat={cat} />)
+    })
+    it('displays profile of the cat in question', () => {
 
-    const HomeTitleRender = renderedHome.find('p')
-    expect(HomeTitleRender.length).toEqual(1)
-  })
+        const catShowRender = renderedCatShow.find('Card')
+
+        expect(catShowRender.length).toEqual(1)
+
+    })
+
 })
