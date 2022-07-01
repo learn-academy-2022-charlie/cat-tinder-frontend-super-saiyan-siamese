@@ -22,11 +22,14 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      // cats: cats is pulling from mockCats.js
+      // might need to link this.state.newCat from CatNew.js
       cats: cats
     }
   }
   createCat = (cat) => {
-    console.log("Cat Created", cat)
+    console.log("Cat Created: ", cat)
+    console.log("Cat state: ", this.state.cats)
   }
   render() {
     const { cats } = this.state

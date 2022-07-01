@@ -28,7 +28,7 @@ class CatNew extends Component {
     // setting state to the updated form content
     this.setState({ newCat: newCat })
     // this console log should show if the newCat state was updated
-    console.log(this.state.newCat)
+    console.log("this.state.newCat updated: ", this.state.newCat)
   }
 
   handleSubmit = () => {

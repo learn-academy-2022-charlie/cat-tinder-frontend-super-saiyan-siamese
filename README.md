@@ -488,10 +488,6 @@ NOTE TO SELF: The submit button doesn't seem to do anything or redirect. We need
     - We added a state for submitted, but we are unsure if it is doing anything.
     - We added a console.log to the handleChange so we can see if the newCat state is being updated.
 
-> file path: src/App.js
-
-NOTE TO SELF: Unsure if Route for CatNew works since our CatNew submit button doesn't work. Checking for the change in newCat state in CatNew.js should help shed some light.
-   - solved. We werent redirecting because we had the this.createCat without actually making the function. Relevant code to follow:
 >file: src/App.js
   ```javascript
   createCat = (cat) => {
@@ -503,4 +499,17 @@ NOTE TO SELF: Unsure if Route for CatNew works since our CatNew submit button do
    <Route path="/catnew" render={(props) => <CatNew createCat={this.createCat} />} />
   ```
 
-Also fixed the header so that the home stays within it, among other css things
+
+# Concerns:
+> file path: src/App.js
+```
+  this.state = {
+    // cats: cats is pulling from mockCats.js
+    // might need to link this.state.newCat from CatNew.js
+    cats: cats
+  }
+```
+
+# Backlog To-Do List
+- Add index button to individual cat pages (Show)
+- Add "add new cat" button to Home
