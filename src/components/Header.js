@@ -6,10 +6,12 @@ class Header extends Component {
   render() {
     return (
       <>
-        <h1 className="header">Welcome to Super Saiyan Siamese Cat Tinder</h1>
-        <NavLink to='/'>
-        HOME!
-        </NavLink>
+        <div id='header-div'>
+          <h1 className="header">Welcome to Super Saiyan Siamese Cat Tinder</h1>
+          <NavLink to='/'>
+          HOME!
+          </NavLink>
+        </div>
       </>
     )
   }

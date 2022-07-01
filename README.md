@@ -491,3 +491,16 @@ NOTE TO SELF: The submit button doesn't seem to do anything or redirect. We need
 > file path: src/App.js
 
 NOTE TO SELF: Unsure if Route for CatNew works since our CatNew submit button doesn't work. Checking for the change in newCat state in CatNew.js should help shed some light.
+   - solved. We werent redirecting because we had the this.createCat without actually making the function. Relevant code to follow:
+>file: src/App.js
+  ```javascript
+  createCat = (cat) => {
+    console.log("Cat Created", cat)
+  }
+  ```
+  Corresponds with:
+  ```javascript
+   <Route path="/catnew" render={(props) => <CatNew createCat={this.createCat} />} />
+  ```
+
+Also fixed the header so that the home stays within it, among other css things

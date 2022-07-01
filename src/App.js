@@ -25,6 +25,9 @@ class App extends Component {
       cats: cats
     }
   }
+  createCat = (cat) => {
+    console.log("Cat Created", cat)
+  }
   render() {
     const { cats } = this.state
     return (
