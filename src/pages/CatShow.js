@@ -16,8 +16,8 @@ class CatShow extends Component {
     return (
       <>
       {cat && 
-            <Card >
-              <CardImg top width="100%" src={cat.image} />
+            <Card style={{width: '30rem'}}>
+              <CardImg className='image'  src={cat.image} />
               <CardBody>
                 <CardTitle>Hi, my name is {cat.name}</CardTitle>
                 <CardSubtitle>{cat.age}</CardSubtitle>

@@ -20,13 +20,11 @@ class CatIndex extends Component {
       {cats && cats.map((cat, index) => {
         return (
           <Card key={index}>
-            {/* The cat images are stretching across the whole browser. We want to have tiny thumbnails for the cats on CatIndex */}
-            {/* <CardImg top height="50px" width="50px" src={cat.image} /> */}
             <CardBody>
               <CardTitle>Hi, my name is {cat.name}</CardTitle>
               <CardSubtitle>{cat.age}</CardSubtitle>
               <NavLink to={`/catshow/${cat.id}`}>
-                <Button>More info here</Button>
+                <Button >Find Out More</Button>
               </NavLink>
             </CardBody>
           </Card>

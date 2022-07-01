@@ -22,8 +22,14 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      // cats: cats is pulling from mockCats.js
+      // might need to link this.state.newCat from CatNew.js
       cats: cats
     }
+  }
+  createCat = (cat) => {
+    console.log("Cat Created: ", cat)
+    console.log("Cat state: ", this.state.cats)
   }
   render() {
     const { cats } = this.state
@@ -34,12 +40,13 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/catindex" render={(props) => <CatIndex cats={cats} />} />
-            <Route path="/catshow/:id" render={(props)=>{
+            <Route path="/catshow/:id" render={(props) => {
               let id = props.match.params.id
-              let cat = this.state.cats.find((catSingular)=> catSingular.id == id)
-              return <CatShow cat={cat}/>
+              let cat = this.state.cats.find((catSingular) =>
+                catSingular.id == id)
+              return <CatShow cat={cat} />
             }} />
-            <Route path="/catnew" component={CatNew} />
+            <Route path="/catnew" render={(props) => <CatNew createCat={this.createCat} />} />
             <Route path="/catedit" component={CatEdit} />
             <Route component={NotFound} />
           </Switch>
