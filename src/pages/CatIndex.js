@@ -18,7 +18,7 @@ class CatIndex extends Component {
       <div>Pick your training partner for the hyperbolic time chamber</div>
 
       {cats && cats.map((cat, index) => {
-        return (
+        return (<>
           <Card key={index}>
             <CardBody>
               <CardTitle>Hi, my name is {cat.name}</CardTitle>
@@ -28,9 +28,14 @@ class CatIndex extends Component {
               </NavLink>
             </CardBody>
           </Card>
+
+        </>
         )
       })
       }
+      <NavLink to='/catnew'>
+        <p>Add a cat</p>
+      </NavLink>
     </>
     )
   }

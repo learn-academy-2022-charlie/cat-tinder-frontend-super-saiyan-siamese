@@ -1,3 +1,14 @@
+# TO DEMO CAT TINDER
+- boot up terminal
+> cat-tinder-backend repo
+$ rails db:drop
+$ rails db:setup
+$ rails start
+
+> cat-tinder-frontend repo
+$ yarn start
+$ y
+
 # Setup
 
 ```
@@ -484,7 +495,9 @@ describe('When CatNew renders', () => {
 
 > file path: src/pages/CatNew.js
 
-NOTE TO SELF: The submit button doesn't seem to do anything or redirect. We need to fix this.
+NOTE TO SELF: 
+(We figured this out, but forgot to update the README. We're so far past this issue that idk where to look to address it)
+The submit button doesn't seem to do anything or redirect. We need to fix this.
     - We added a state for submitted, but we are unsure if it is doing anything.
     - We added a console.log to the handleChange so we can see if the newCat state is being updated.
 
@@ -499,17 +512,243 @@ NOTE TO SELF: The submit button doesn't seem to do anything or redirect. We need
    <Route path="/catnew" render={(props) => <CatNew createCat={this.createCat} />} />
   ```
 
+# Update
+> file path: src/pages/CatEdit.js
+```javascript
+import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+import {
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Button
+} from 'reactstrap'
 
-# Concerns:
+class CatEdit extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      newCat: {
+        name: "",
+        age: "",
+        enjoys: "",
+        image: ""
+      },
+      submitted: false
+    }
+  }
+  handleChange = (e) => {
+    // destructuring form out of state
+    let { newCat } = this.state
+    newCat[e.target.name] = e.target.value
+    // setting state to the updated form content
+    this.setState({ newCat: newCat })
+    // this console log should show if the newCat state was updated
+    console.log("this.state.newCat updated: ", this.state.newCat)
+  }
+
+  updateCat = (cat, id) => {
+    console.log("Cat: ", cat)
+    console.log("Cat id: ", id)
+  }
+
+  handleSubmit = () => {
+    this.props.updateCat(this.state.newCat, this.props.cat.id)
+    this.setState({ submitted: true })
+  }
+
+  render() {
+    return (
+      <>
+        <Form>
+          <FormGroup>
+            <Label>Name</Label>
+            <Input
+              type="text"
+              name="name"
+              onChange={this.handleChange}
+              value={this.state.newCat.name}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Age</Label>
+            <Input
+              type="text"
+              name="age"
+              onChange={this.handleChange}
+              value={this.state.newCat.age}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Hobbies</Label>
+            <Input
+              type="text"
+              name="enjoys"
+              onChange={this.handleChange}
+              value={this.state.newCat.enjoys}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Picture</Label>
+            <Input
+              type="text"
+              name="image"
+              onChange={this.handleChange}
+              value={this.state.newCat.image}
+            />
+          </FormGroup>
+          <Button onClick={this.handleSubmit} name='submit'>
+            Launch that cat into destiny
+          </Button>
+        </Form>
+        {this.state.submitted && <Redirect to={`/catshow/${this.props.cat.id}`} />}
+      </>
+    )
+  }
+}
+export default CatEdit
+```
+
+> file path: src/pages/CatEdit.test.js
+```javascript
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import CatEdit from './CatEdit.js'
+
+//Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
+Enzyme.configure({ adapter: new Adapter() })
+
+describe('When CatEdit renders', () => {
+
+    let renderedCatEdit
+    beforeEach(() => {
+        renderedCatEdit = shallow(<CatEdit />)
+    })
+    it('displays a form to make a new cat', () => {
+        const catShowRender = renderedCatEdit.find('Form')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat name', () => {
+        const catShowRender = renderedCatEdit.find('[name="name"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat age', () => {
+        const catShowRender = renderedCatEdit.find('[name="age"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat enjoys', () => {
+        const catShowRender = renderedCatEdit.find('[name="enjoys"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+    it('displays an input for a cat image', () => {
+        const catShowRender = renderedCatEdit.find('[name="image"]')
+        expect(catShowRender.length).toEqual(1)
+    })
+
+})
+```
+
+# Fetch Read
+> file path: src/App.js
+```javascript
+constructor(props){
+  super(props)
+  this.state = {
+    // remove the mock cats and start with an empty array
+    cats: []
+  }
+}
+
+componentDidMount(){
+  this.readCat()
+}
+
+readCat = () => {
+  fetch("http://localhost:3000/cats")
+  .then(response => response.json())
+  // set the state with the data from the backend into the empty array
+  .then(catsArray => this.setState({cats: catsArray}))
+  .catch(errors => console.log("Cat read errors:", errors))
+}
+```
+
+# Fetch Create
 > file path: src/App.js
 ```
-  this.state = {
-    // cats: cats is pulling from mockCats.js
-    // might need to link this.state.newCat from CatNew.js
-    cats: cats
-  }
+createCat = (newCat) => {
+  fetch("http://localhost:3000/cats", {
+    // converting an object to a string
+    body: JSON.stringify(newCat),
+    // specify the info being sent in JSON and the info returning should be JSON
+    headers: {
+      "Content-Type": "application/json"
+    },
+    // HTTP verb so the correct endpoint is invoked on the server
+    method: "POST"
+  })
+  .then(response => response.json())
+  .then(payload => this.readCat())
+  .catch(errors => console.log("Cat create errors:", errors))
+}
 ```
 
-# Backlog To-Do List
-- Add index button to individual cat pages (Show)
-- Add "add new cat" button to Home
+# Fetch Update
+> file path: src/App.js
+```javascript
+updateCat = (cat, id) => {
+  fetch(`http://localhost:3000/cats/${id}`, {
+    // converting an object to a string
+    body: JSON.stringify(cat),
+    // specify the info being sent in JSON and the info returning should be JSON
+    headers: {
+      "Content-Type": "application/json"
+    },
+    // HTTP verb so the correct endpoint is invoked on the server
+    method: "PATCH"
+  })
+  .then(response => response.json())
+  .then(payload => this.readCat())
+  .catch(errors => console.log("Cat update errors:", errors))
+}
+```
+# Fetch Delete
+> file path: src/App.js
+update the route for CatShow
+```javascript
+<Route path="/catshow/:id" render={(props) => {
+              let id = props.match.params.id
+              let cat = this.state.cats.find((catSingular) =>
+                catSingular.id == id)
+              return <CatShow cat={cat} deleteCat={this.deleteCat} />
+            }} />
+```
+
+> file path: src/pages/CatShow.js
+Only the added lines
+```javascript
+import { NavLink } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+
+ handleDelete = () => {
+    this.props.deleteCat(this.props.cat.id)
+    this.setState({ deleted: true })
+  }
+
+  <Button onClick={this.handleDelete} name='delete'>
+    Delete Cat Profile
+  </Button>
+```
+
+
+## To-Do later
+> CatShow
+  - Set it so the name, age, and enjoys labels are before the flavor text.
