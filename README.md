@@ -1,3 +1,14 @@
+# TO DEMO CAT TINDER
+- boot up terminal
+> cat-tinder-backend repo
+$ rails db:drop
+$ rails db:setup
+$ rails start
+
+> cat-tinder-frontend repo
+$ yarn start
+$ y
+
 # Setup
 
 ```
