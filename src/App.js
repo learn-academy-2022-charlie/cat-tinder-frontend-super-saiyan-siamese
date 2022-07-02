@@ -72,6 +72,18 @@ class App extends Component {
       .catch(errors => console.log("Cat update errors:", errors))
   }
 
+  deleteCat = (id) => {
+    fetch(`http://localhost:3000/cats/${id}`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "DELETE"
+    })
+      .then(response => response.json())
+      .then(payload => this.readCat())
+      .catch(errors => console.log("delete errors:", errors))
+  }
+
   render() {
     const { cats } = this.state
     return (
@@ -85,7 +97,7 @@ class App extends Component {
               let id = props.match.params.id
               let cat = this.state.cats.find((catSingular) =>
                 catSingular.id == id)
-              return <CatShow cat={cat} />
+              return <CatShow cat={cat} deleteCat={this.deleteCat} />
             }} />
             <Route path="/catnew" render={(props) => <CatNew createCat={this.createCat} />} />
             <Route path="/catedit/:id" render={(props) => {

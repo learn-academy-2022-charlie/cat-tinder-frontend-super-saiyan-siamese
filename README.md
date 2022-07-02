@@ -692,7 +692,7 @@ createCat = (newCat) => {
 
 # Fetch Update
 > file path: src/App.js
-```
+```javascript
 updateCat = (cat, id) => {
   fetch(`http://localhost:3000/cats/${id}`, {
     // converting an object to a string
@@ -709,11 +709,34 @@ updateCat = (cat, id) => {
   .catch(errors => console.log("Cat update errors:", errors))
 }
 ```
+# Fetch Delete
+> file path: src/App.js
+update the route for CatShow
+```javascript
+<Route path="/catshow/:id" render={(props) => {
+              let id = props.match.params.id
+              let cat = this.state.cats.find((catSingular) =>
+                catSingular.id == id)
+              return <CatShow cat={cat} deleteCat={this.deleteCat} />
+            }} />
+```
 
+> file path: src/pages/CatShow.js
+Only the added lines
+```javascript
+import { NavLink } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
-## Little fixes
-- Added CatNew button to CatIndex and CatShow
-- Added CatIndex button to CatShow
+ handleDelete = () => {
+    this.props.deleteCat(this.props.cat.id)
+    this.setState({ deleted: true })
+  }
+
+  <Button onClick={this.handleDelete} name='delete'>
+    Delete Cat Profile
+  </Button>
+```
+
 
 ## To-Do later
 > CatShow
